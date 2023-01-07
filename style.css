@@ -1,0 +1,16 @@
+#box-1{
+    position: absolute;
+    outline-style: solid;
+    /* width: 100px;
+    height: 100px;
+    top:10px; */
+
+
+}
+#video{
+    position: absolute;
+    scale: 2000%;
+    top:200px;
+    /* width: 640px;
+    height: 480px; */
+}
