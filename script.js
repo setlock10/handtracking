@@ -13,7 +13,7 @@ var ctx = canvas.getContext('2d');
 const frames = [];
 const htModel = {};
 
-//video.clientWidth = '500px';
+video.clientWidth = '500px';
 
 handTrack.load().then(model => { 
         //console.log(model);
