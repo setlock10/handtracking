@@ -5,6 +5,10 @@ body {
 .p20 {
     padding: 20px;
 }
+#trackbutton{
+    position: absolute;
+    top:10px;
+}
 #reticle{
     position: absolute;
     outline-style: solid;
