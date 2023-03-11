@@ -6,12 +6,17 @@ body {
     padding: 20px;
 }
 #reticle{
-position: absolute;
-outline-style: solid;
+    position: absolute;
+    outline-style: solid;
+    top: 100px;
+    left:450px;
 
- width: 10px;
-height: 10px;
-/* top:10px;  */
+    width: 10px;
+    height: 10px;
+    /* top:10px;  */
+    z-index: 3;
+    /* color:#0063FF; */
+    background-color: black;
 }
 
 .balloon{
@@ -37,6 +42,20 @@ height: 10px;
     top:100px;
     position:absolute;
 
+}
+.pop-background{
+    background: url("./balloon_pop_sprite2.png") ;
+
+}
+.pop{
+    animation: balloon-pop 300ms linear;
+    animation-timing-function: steps(3);
+    animation-iteration-count: 1;
+}
+
+@keyframes balloon-pop{
+    from { background-position: 0px; }
+    to { background-position: -300px; }
 }
 
 #myvideo{

@@ -21,6 +21,10 @@ const balloons = [];
 const numBalloons = 8;
 const numColumns = 5;
 const basement = 1300;
+const scalar = 1.33;
+const biasX=50;
+const biasY=0;
+var isPointing = false;
 
 
 function loadBalloons(){
@@ -32,11 +36,27 @@ function loadBalloons(){
         let rand = Math.floor(Math.random() * numColumns);
         balloons[i].style.left = `${(rand * 100)+400}`+'px';
 
+        if (rand === 1) 
+            balloons[i].style.background = "url('./balloon_yellow.png')";
+        if (rand === 2) 
+            balloons[i].style.background = "url('./balloon_green.png')";
+        if (rand === 3) 
+            balloons[i].style.background = "url('./balloon_red.png')";
+        
+
     }
 }
 
 loadBalloons();
 
+function resetBalloon(balloon){
+    balloon.classList.remove("pop")
+    balloon.classList.remove("pop-background")
+    //console.log(balloon)
+    let rand = Math.floor(Math.random() * numColumns);
+    balloon.style.top=`${basement}`+'px';
+    balloon.style.left = `${(rand * 100)+400}`+'px';
+}
 
 
 function moveBalloons(){
@@ -51,12 +71,19 @@ function moveBalloons(){
         let rand = Math.floor(Math.random() * numColumns);
 
         if (top<100){
-            balloons[i].style.top=`${basement}`+'px';
-            balloons[i].style.left = `${(rand * 100)+400}`+'px';
+            balloons[i].classList.add("pop-background");
+            balloons[i].classList.add("pop");
+
+            
+            setTimeout(resetBalloon,300,balloons[i]); //300ms = length of animation
+
+
         }
         else{
             balloons[i].style.top=`${ top-2 }`+'px';
         }
+
+
 
        
 
@@ -101,7 +128,7 @@ function startVideo() {
             updateNote.innerText = "Video started. Now tracking";
             isVideo = true;
             runDetection();
-            setInterval(moveBalloons,5);//Timer for Balloons
+            setInterval(moveBalloons,5);                    //Timer for Balloons
         } else {
             updateNote.innerText = "Please enable video"
         }
@@ -124,12 +151,40 @@ function toggleVideo() {
 
 function runDetection() {
     model.detect(video).then(predictions => {
-      // console.log("Predictions: ", predictions);
-        if(predictions[0].bbox){
-            //console.log(predictions[0].bbox);
-            reticle.style.left=`${predictions[0].bbox[0]}`+'px';
-            reticle.style.top=`${predictions[0].bbox[1]+122}`+'px';
+      console.log("Predictions: ", predictions);
+
+        /////  SHOULD BE A FUNCTION
+
+        // bounding box uses left, top, right, bottom
+
+        if (predictions[1] && (predictions[1].label === 'point')){
+
+            reticle.style.backgroundColor='lightgreen';
+            isPointing =true;
+
         }
+        else if(predictions[1] && (predictions[1].label === 'closed') && isPointing){
+            reticle.style.backgroundColor='red';
+            isPointing = false;
+
+        }
+        else{
+            reticle.style.backgroundColor='black';
+            isPointing = false;
+        }
+
+
+        if(predictions[1]){
+            //console.log(predictions[0].bbox);
+            console.log(predictions[1].bbox[2]-predictions[1].bbox[0])
+            reticle.style.left=`${(predictions[1].bbox[0]+biasX)*scalar}`+'px';
+            //reticle.style.left=`${((predictions[1].bbox[0])*scalar)+predictions[1].bbox[3]-predictions[1].bbox[0]}`+'px';
+            //reticle.style.left=`${((predictions[1].bbox[3]-predictions[1].bbox[0])+predictions[1].bbox[0])*scalar}`+'px';
+            reticle.style.top=`${(predictions[1].bbox[1]*scalar)+100}`+'px';
+        }
+
+         ///// 
+
         model.renderPredictions(predictions, canvas, context, video);
         if (isVideo) {
             requestAnimationFrame(runDetection);
