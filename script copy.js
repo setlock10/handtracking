@@ -12,25 +12,19 @@ var canvas = document.createElement('canvas');
     canvas.height = h;
 var ctx = canvas.getContext('2d');
 const frames = [];
-var htModel = {};
+const htModel = {};
 
 video.clientWidth = '500px';
 
 handTrack.load().then(model => { 
         console.log(model);
-        htModel = model;
+        //htModel = model;
 });
-
-
-
-
 handTrack.startVideo(video).then(img=>{
     //console.log(video);
         ctx.drawImage(video, 0, 0, w, h);
         
         setInterval(getFrame,1000)
-
-        
 })
 
 function getFrame(){
@@ -44,7 +38,7 @@ function getFrame(){
     // }
    // handTrack.
    
-    htModel.detect(ctx.getImageData(0, 0, w, h)).then(predictions => {
+    handTrack.detect(ctx.getImageData(0, 0, w, h)).then(predictions => {
         
         console.log('Predictions: ', predictions); // bbox predictions
         box1.style.left = `${predictions[0].bbox[0]}px`;
