@@ -27,6 +27,10 @@ const biasY=0;
 var isPointing = false;
 
 
+var reticleX = 0;
+var reticleY = 0;
+
+
 function loadBalloons(){
     for (let i = 0;i < numBalloons; i++){
         balloons[i] = document.createElement("div");
@@ -58,30 +62,59 @@ function resetBalloon(balloon){
     balloon.style.left = `${(rand * 100)+400}`+'px';
 }
 
+function popBalloon(balloon){
+    balloon.style.background = "url('./balloon_pop_sprite2.png')";
+    //balloon.classList.add('pop-background')
+    balloon.classList.add('pop')
+    console.log(balloon);
+
+}
+
 
 function moveBalloons(){
+
+   // console.log(balloons);
 
 
     for (let i = 0;i < numBalloons; i++){
         let top = parseInt(window.getComputedStyle(balloons[i]).getPropertyValue("top"))  ;
+        let left = parseInt(window.getComputedStyle(balloons[i]).getPropertyValue("left"))  ;
 
         // if (i === 2)
         //     top = top - (i*150)
 
-        let rand = Math.floor(Math.random() * numColumns);
+        //let rand = Math.floor(Math.random() * numColumns);
 
         if (top<100){
-            balloons[i].classList.add("pop-background");
-            balloons[i].classList.add("pop");
+           // balloons[i].classList.add("pop-background");
+           // balloons[i].classList.add("pop");
 
             
-            setTimeout(resetBalloon,300,balloons[i]); //300ms = length of animation
+            //setTimeout(resetBalloon,300,balloons[i]); //300ms = length of animation
+            let rand = Math.floor(Math.random() * numColumns);
+            balloons[i].style.top=`${basement}`+'px';
+            balloons[i].style.left = `${(rand * 100)+400}`+'px';
 
 
         }
         else{
-            balloons[i].style.top=`${ top-2 }`+'px';
+            balloons[i].style.top=`${ top-4 }`+'px';
+
+
+            //Collision detection
+           // let top = parseInt(window.getComputedStyle(balloons[i]).getPropertyValue("top"))  ;
+           if (reticleX>=left && reticleX <=left+100 && reticleY>= top && reticleY<=top+150){
+            // balloons[i].classList.add('pop-background')
+            // balloons[i].classList.add('pop')
+                console.log('hit');
+                popBalloon(balloons[i]);
         }
+
+
+
+        }
+
+
 
 
 
@@ -128,7 +161,7 @@ function startVideo() {
             updateNote.innerText = "Video started. Now tracking";
             isVideo = true;
             runDetection();
-            setInterval(moveBalloons,5);                    //Timer for Balloons
+            setInterval(moveBalloons,10);                    //Timer for Balloons
         } else {
             updateNote.innerText = "Please enable video"
         }
@@ -151,7 +184,7 @@ function toggleVideo() {
 
 function runDetection() {
     model.detect(video).then(predictions => {
-      console.log("Predictions: ", predictions);
+     // console.log("Predictions: ", predictions);
 
         /////  SHOULD BE A FUNCTION
 
@@ -162,21 +195,31 @@ function runDetection() {
             reticle.style.backgroundColor='lightgreen';
             isPointing =true;
 
+            reticleX = parseInt(window.getComputedStyle(reticle).getPropertyValue("left")) + 5  ;
+            reticleY = parseInt(window.getComputedStyle(reticle).getPropertyValue("top")) + 5 ;
+
+
         }
         else if(predictions[1] && (predictions[1].label === 'closed') && isPointing){
             reticle.style.backgroundColor='red';
             isPointing = false;
+            reticleX=0;
+            reticleY=0;
+
 
         }
         else{
             reticle.style.backgroundColor='black';
             isPointing = false;
+            reticleX=0;
+            reticleY=0;
+
         }
 
 
         if(predictions[1]){
             //console.log(predictions[0].bbox);
-            console.log(predictions[1].bbox[2]-predictions[1].bbox[0])
+           // console.log(predictions[1].bbox[2]-predictions[1].bbox[0])
             reticle.style.left=`${(predictions[1].bbox[0]+biasX)*scalar}`+'px';
             //reticle.style.left=`${((predictions[1].bbox[0])*scalar)+predictions[1].bbox[3]-predictions[1].bbox[0]}`+'px';
             //reticle.style.left=`${((predictions[1].bbox[3]-predictions[1].bbox[0])+predictions[1].bbox[0])*scalar}`+'px';
