@@ -59,6 +59,15 @@ function resetBalloon(balloon){
     //console.log(balloon)
     let rand = Math.floor(Math.random() * numColumns);
     balloon.style.top=`${basement}`+'px';
+    balloon.style.visibility='visible';
+    rand = Math.floor(Math.random() * numColumns);
+    if (rand === 1) 
+    balloon.style.background = "url('./balloon_yellow.png')";
+    if (rand === 2) 
+    balloon.style.background = "url('./balloon_green.png')";
+    if (rand === 3) 
+    balloon.style.background = "url('./balloon_red.png')";
+
     balloon.style.left = `${(rand * 100)+400}`+'px';
 }
 
@@ -67,6 +76,7 @@ function popBalloon(balloon){
     //balloon.classList.add('pop-background')
     balloon.classList.add('pop')
     console.log(balloon);
+    setTimeout(()=>balloon.style.visibility='hidden',200)
 
 }
 
@@ -96,6 +106,22 @@ function moveBalloons(){
             balloons[i].style.left = `${(rand * 100)+400}`+'px';
 
 
+            balloons[i].style.visibility='visible';
+            if (rand === 4) 
+                balloons[i].style.background = "url('./balloon_cyan.png')";
+            if (rand === 0) 
+                balloons[i].style.background = "url('./balloon_cyan.png')";
+            if (rand === 1) 
+                balloons[i].style.background = "url('./balloon_yellow.png')";
+            if (rand === 2) 
+                balloons[i].style.background = "url('./balloon_green.png')";
+            if (rand === 3) 
+                balloons[i].style.background = "url('./balloon_red.png')";
+     
+         
+        
+
+
         }
         else{
             balloons[i].style.top=`${ top-4 }`+'px';
@@ -106,7 +132,7 @@ function moveBalloons(){
            if (reticleX>=left && reticleX <=left+100 && reticleY>= top && reticleY<=top+150){
             // balloons[i].classList.add('pop-background')
             // balloons[i].classList.add('pop')
-                console.log('hit');
+              //  console.log('hit');
                 popBalloon(balloons[i]);
         }
 
