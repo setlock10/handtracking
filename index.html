@@ -13,18 +13,18 @@
   <h1>Balloon Pop (touchless</h1>
   <!-- <img id="img" src="hand.jpg"/>  -->
   <form id='form'>
-    <label for="blood-amount">Blood amount</label>
-    <input id="blood-amount" type="text" placeholder="Number of drops ..."/>
-    <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
-    <label for="vehicle1"> I have a bike</label><br>
-    <input type="submit" value="Add Blood"></button>
+    <input type="checkbox" id="hasVideo" name="vehicle1" value="Bike" class="params">
+    <label for="hasVideo" class="params"> Video</label><br>
+    <input type="checkbox" id="hasReticle" name="vehicle1" value="Bike" class="params">
+    <label for="hasReticle" class="params"> Reticle</label><br>
+    <input type="submit" value="Update" class="params"></button>
 
   </form>
   <audio id="popping"><source src="popping.mp3" type="audio/mp3"></audio>
 
-  <div class="p20">
+  <!-- <div class="p20">
     Handtrack.js allows you prototype handtracking interactions in the browser in 10 lines of code.
-  </div>
+  </div> -->
   <div class="mb10">
     <button onclick="toggleVideo()" id="trackbutton"  type="button">
       Start / Stop
