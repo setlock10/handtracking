@@ -37,12 +37,13 @@ body {
     margin-right: 10px;
     /* width: 450px;
     height: 338px; */
-    width: 900px;
-    height: 676px;
+    /* width: 900px;
+    height: 676px; */
+    /* scale: 1.5; */
     border-bottom: 3px solid #0063FF;
     box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.2), 0 4px 10px 0 #00000030;
     background: #333;
-    left: 0px;
+    left: 300px;
     top:100px;
     position:absolute;
 

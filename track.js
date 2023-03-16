@@ -3,16 +3,27 @@ const canvas = document.getElementById("canvas");
 const context = canvas.getContext("2d");
 let trackButton = document.getElementById("trackbutton");
 let updateNote = document.getElementById("updatenote");
-let reticle = document.getElementById("reticle")
+let reticle = document.getElementById("reticle");
+let parms = document.getElementById('form');
+let sfx = document.getElementById("popping");
 
 let isVideo = false;
 let model = null;
 
+console.log(parms)
+//// Form
+parms.addEventListener('submit',e=>{
+    e.preventDefault();
+    console.log('wtf');
+
+    // Update CSS Parameters
+
+})
 
 //// Balloon Portion
 
 const bodyMain = document.getElementById("bodyMain");
-console.log(bodyMain);
+//console.log(bodyMain);
 // const balloonTest = document.createElement("div");
 // balloonTest.setAttribute('class','balloon');
 // bodyMain.appendChild(balloonTest);
@@ -75,7 +86,8 @@ function popBalloon(balloon){
     balloon.style.background = "url('./balloon_pop_sprite2.png')";
     //balloon.classList.add('pop-background')
     balloon.classList.add('pop')
-    console.log(balloon);
+    sfx.play();
+    console.log(sfx);
     setTimeout(()=>balloon.style.visibility='hidden',200)
 
 }
@@ -178,6 +190,9 @@ const modelParams = {
     maxNumBoxes: 20,        // maximum number of boxes to detect
     iouThreshold: 0.5,      // ioU threshold for non-max suppression
     scoreThreshold: 0.3,    // confidence threshold for predictions. was .06
+    imageScaleFactor: 2.0,
+    modelSize: "medium",
+
 }
 
 function startVideo() {
@@ -264,6 +279,7 @@ function runDetection() {
 // Load the model.
 handTrack.load(modelParams).then(lmodel => {
     // detect objects in the image.
+    console.log(lmodel);
     model = lmodel
     updateNote.innerText = "Loaded Model!"
     trackButton.disabled = false
