@@ -7,6 +7,8 @@ let reticle = document.getElementById("reticle");
 let parms = document.getElementById('form');
 const sfx = document.getElementById("popping");
 
+const soundEffect = new Audio();
+
 let isVideo = false;
 let model = null;
 
@@ -213,7 +215,7 @@ function startVideo() {
 }
 
 function toggleVideo() {
-    const soundEffect = new Audio();
+    // const soundEffect = new Audio();
     soundEffect.autoplay = true;
     soundEffect.src="./popping.mp3"
     if (!isVideo) {
