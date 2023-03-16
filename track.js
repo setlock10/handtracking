@@ -202,25 +202,25 @@ function startVideo() {
     handTrack.startVideo(video).then(function (status) {
         console.log("video started", status);
         if (status) {
-            //updateNote.innerText = "Video started. Now tracking";
+            updateNote.innerText = "Video started. Now tracking";
             isVideo = true;
             runDetection();
             setInterval(moveBalloons,10);                    //Timer for Balloons
         } else {
-           // updateNote.innerText = "Please enable video"
+            updateNote.innerText = "Please enable video"
         }
     });
 }
 
 function toggleVideo() {
     if (!isVideo) {
-        //updateNote.innerText = "Starting video"
+        updateNote.innerText = "Starting video"
         startVideo();
     } else {
-        //updateNote.innerText = "Stopping video"
+        updateNote.innerText = "Stopping video"
         handTrack.stopVideo(video)
         isVideo = false;
-        //updateNote.innerText = "Video stopped"
+        updateNote.innerText = "Video stopped"
     }
 }
 
@@ -284,7 +284,7 @@ handTrack.load(modelParams).then(lmodel => {
     // detect objects in the image.
     console.log(lmodel);
     model = lmodel
-    //updateNote.innerText = "Loaded Model!"
+    updateNote.innerText = "Loaded Model!"
     trackButton.disabled = false
 });
 

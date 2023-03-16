@@ -10,26 +10,26 @@
 </head>
 
 <body id='bodyMain' class="bx--body p20">
-  <h1>Balloon Pop (touchless)</h1>
+  <h1>Balloon Pop (touchless</h1>
   <!-- <img id="img" src="hand.jpg"/>  -->
   <form id='form'>
-    <h2>Parameters</h2>
-    <label for="blood-amount">Blood amount</label><br>
+    <label for="blood-amount">Blood amount</label>
+    <input id="blood-amount" type="text" placeholder="Number of drops ..."/>
     <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
     <label for="vehicle1"> I have a bike</label><br>
-    <input type="submit" value="Apply"></button>
+    <input type="submit" value="Add Blood"></button>
 
   </form>
-  <audio id="popping"><source src="popping.mp3" type="audio/mp3"></audio>
+  <audio id="popping"><source src="popping.m4a" type="audio/m4a-latm"></audio>
 
-  <!-- <div class="p20">
+  <div class="p20">
     Handtrack.js allows you prototype handtracking interactions in the browser in 10 lines of code.
-  </div> -->
+  </div>
   <div class="mb10">
     <button onclick="toggleVideo()" id="trackbutton"  type="button">
       Start / Stop
     </button>
-    <!-- <div id="updatenote" class="updatenote mt10"> loading model ..</div> -->
+    <div id="updatenote" class="updatenote mt10"> loading model ..</div>
   </div>
   <div id="reticle"></div>
   <video class="videobox " autoplay="autoplay" id="myvideo"></video>
