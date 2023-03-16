@@ -108,3 +108,6 @@ body {
 .params{
     margin: 10px;
 }
+#videoWidth{
+    width:80px;
+}
