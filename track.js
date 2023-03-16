@@ -5,7 +5,7 @@ let trackButton = document.getElementById("trackbutton");
 let updateNote = document.getElementById("updatenote");
 let reticle = document.getElementById("reticle");
 let parms = document.getElementById('form');
-let sfx = document.getElementById("popping");
+const sfx = document.getElementById("popping");
 
 let isVideo = false;
 let model = null;
@@ -86,6 +86,9 @@ function popBalloon(balloon){
     balloon.style.background = "url('./balloon_pop_sprite2.png')";
     //balloon.classList.add('pop-background')
     balloon.classList.add('pop')
+    // const sfx = document.createElement("audio");
+    // sfx.setAttribute("src","popping.m4a");
+    // sfx.setAttribute("type","x-m4a");
     sfx.play();
     console.log(sfx);
     setTimeout(()=>balloon.style.visibility='hidden',200)

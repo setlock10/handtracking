@@ -75,7 +75,14 @@ body {
 }
 
 .mt10 {
-    margin-top: 10px
+    margin-top: 10px;
+    
+}
+#trackbutton{
+    text-align: right;
+    width: 18
+    0px;
+    
 }
 
 .updatenote {
@@ -83,4 +90,5 @@ body {
     background: rgb(245, 147, 20);
     color: white;
     display: inline;
+    
 }
