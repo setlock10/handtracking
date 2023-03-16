@@ -108,6 +108,13 @@ body {
 .params{
     margin: 10px;
 }
+.inputBox{
+    width:80px;
+}
 #videoWidth{
+    width:80px;
+    
+}
+#videoHeight{
     width:80px;
 }
