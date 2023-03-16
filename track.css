@@ -97,8 +97,9 @@ body {
     position: absolute;
     width:200px;
     height:600px;
-    top:300px;
+    top:100px;
     outline: auto;
+    display:block;
     
 
 }
