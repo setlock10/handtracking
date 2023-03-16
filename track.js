@@ -6,6 +6,8 @@ let updateNote = document.getElementById("updatenote");
 let reticle = document.getElementById("reticle");
 let parms = document.getElementById('form');
 const sfx = document.getElementById("popping");
+const videoCheck=document.getElementById("hasVideo");
+const reticleCheck=document.getElementById("hasReticle");
 
 const soundEffect = new Audio();
 
@@ -16,9 +18,23 @@ console.log(parms)
 //// Form
 parms.addEventListener('submit',e=>{
     e.preventDefault();
-    console.log('wtf');
+    console.log(videoCheck.checked);
+    
 
     // Update CSS Parameters
+    if(videoCheck.checked){
+        canvas.style.visibility='visible';
+    }
+    else{
+        canvas.style.visibility='hidden';
+    }
+    if(reticleCheck.checked){
+        reticle.style.visibility='visible';
+    }
+    else{
+        reticle.style.visibility='hidden';
+    }
+    
 
 })
 
@@ -52,6 +68,7 @@ function loadBalloons(){
         bodyMain.appendChild(balloons[i]);
         let rand = Math.floor(Math.random() * numColumns);
         balloons[i].style.left = `${(rand * 100)+400}`+'px';
+        balloons[i].isPopped=false;
 
         if (rand === 1) 
             balloons[i].style.background = "url('./balloon_yellow.png')";
@@ -91,9 +108,15 @@ function popBalloon(balloon){
     // const sfx = document.createElement("audio");
     // sfx.setAttribute("src","popping.m4a");
     // sfx.setAttribute("type","x-m4a");
-    soundEffect.play();
-    console.log(sfx);
-    setTimeout(()=>balloon.style.visibility='hidden',200)
+    if (balloon.isPopped!==true){
+        soundEffect.play();
+        balloon.isPopped=true;
+        console.log(balloon.isPopped);
+    
+    }
+    setTimeout(()=>{balloon.style.visibility='hidden';
+                    balloon.isPopped=false;
+                },200)
 
 }
 
