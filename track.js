@@ -213,6 +213,9 @@ function startVideo() {
 }
 
 function toggleVideo() {
+    const soundEffect = new Audio();
+    soundEffect.autoplay = true;
+    soundEffect.src="./popping.mp3"
     if (!isVideo) {
         updateNote.innerText = "Starting video"
         startVideo();
