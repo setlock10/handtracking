@@ -91,7 +91,7 @@ function popBalloon(balloon){
     // const sfx = document.createElement("audio");
     // sfx.setAttribute("src","popping.m4a");
     // sfx.setAttribute("type","x-m4a");
-    sfx.play();
+    soundEffect.play();
     console.log(sfx);
     setTimeout(()=>balloon.style.visibility='hidden',200)
 
