@@ -92,3 +92,13 @@ body {
     display: inline;
     
 }
+
+#form{
+    position: absolute;
+    width:200px;
+    height:600px;
+    top:300px;
+    outline: auto;
+    
+
+}
