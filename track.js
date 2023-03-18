@@ -8,17 +8,56 @@ let parms = document.getElementById('form');
 const sfx = document.getElementById("popping");
 const videoCheck=document.getElementById("hasVideo");
 const reticleCheck=document.getElementById("hasReticle");
+const inputXBias = document.getElementById("xBias")
+const inputYBias = document.getElementById("yBias")
 
 const soundEffect = new Audio();
 
 let isVideo = false;
 let model = null;
 
-console.log(parms)
+
+
+//// Balloon Portion
+
+const bodyMain = document.getElementById("bodyMain");
+//console.log(bodyMain);
+// const balloonTest = document.createElement("div");
+// balloonTest.setAttribute('class','balloon');
+// bodyMain.appendChild(balloonTest);
+
+const balloons = [];
+const numBalloons = 8;
+const numColumns = 5;
+const basement = 1300;
+const scalar = 1.33;
+let biasX=50;
+let  biasY=0;
+var isPointing = false;
+
+
+var reticleX = 0;
+var reticleY = 0;
+
+
+//console.log(parms)
 //// Form
 parms.addEventListener('submit',e=>{
     e.preventDefault();
-    console.log(videoCheck.checked);
+    
+    //biasX = parseInt(inputXBias.value) || parseInt(inputXBias.placeHolder)
+    if(parseInt(inputXBias.value)){
+        biasX=parseInt(inputXBias.value);
+    }else{
+        biasX=parseInt(inputXBias.placeholder);
+    }
+
+    if(parseInt(inputYBias.value)){
+        biasY=parseInt(inputYBias.value);
+    }else{
+        biasY=parseInt(inputYBias.placeholder);
+    }
+    console.log(parseInt(biasY))
     
 
     // Update CSS Parameters
@@ -38,26 +77,6 @@ parms.addEventListener('submit',e=>{
 
 })
 
-//// Balloon Portion
-
-const bodyMain = document.getElementById("bodyMain");
-//console.log(bodyMain);
-// const balloonTest = document.createElement("div");
-// balloonTest.setAttribute('class','balloon');
-// bodyMain.appendChild(balloonTest);
-
-const balloons = [];
-const numBalloons = 8;
-const numColumns = 5;
-const basement = 1300;
-const scalar = 1.33;
-const biasX=50;
-const biasY=0;
-var isPointing = false;
-
-
-var reticleX = 0;
-var reticleY = 0;
 
 
 function loadBalloons(){
@@ -295,7 +314,7 @@ function runDetection() {
             reticle.style.left=`${(predictions[1].bbox[0]+biasX)*scalar}`+'px';
             //reticle.style.left=`${((predictions[1].bbox[0])*scalar)+predictions[1].bbox[3]-predictions[1].bbox[0]}`+'px';
             //reticle.style.left=`${((predictions[1].bbox[3]-predictions[1].bbox[0])+predictions[1].bbox[0])*scalar}`+'px';
-            reticle.style.top=`${(predictions[1].bbox[1]*scalar)+100}`+'px';
+            reticle.style.top=`${((predictions[1].bbox[1]+biasY)*scalar)+100}`+'px';
         }
 
          ///// 
