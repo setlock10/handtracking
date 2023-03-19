@@ -142,29 +142,15 @@ function popBalloon(balloon){
 
 function moveBalloons(){
 
-   // console.log(balloons);
-
-
     for (let i = 0;i < numBalloons; i++){
         let top = parseInt(window.getComputedStyle(balloons[i]).getPropertyValue("top"))  ;
         let left = parseInt(window.getComputedStyle(balloons[i]).getPropertyValue("left"))  ;
 
-        // if (i === 2)
-        //     top = top - (i*150)
-
-        //let rand = Math.floor(Math.random() * numColumns);
-
-        if (top<100){
-           // balloons[i].classList.add("pop-background");
-           // balloons[i].classList.add("pop");
-
+        if (top<100){   //recycle balloon
             
-            //setTimeout(resetBalloon,300,balloons[i]); //300ms = length of animation
             let rand = Math.floor(Math.random() * numColumns);
             balloons[i].style.top=`${basement}`+'px';
             balloons[i].style.left = `${(rand * 100)+400}`+'px';
-
-
             balloons[i].style.visibility='visible';
             if (rand === 4) 
                 balloons[i].style.background = "url('./balloon_cyan.png')";
@@ -176,56 +162,16 @@ function moveBalloons(){
                 balloons[i].style.background = "url('./balloon_green.png')";
             if (rand === 3) 
                 balloons[i].style.background = "url('./balloon_red.png')";
-     
-         
-        
-
-
-        }
+         }
         else{
             balloons[i].style.top=`${ top-4 }`+'px';
 
-
             //Collision detection
-           // let top = parseInt(window.getComputedStyle(balloons[i]).getPropertyValue("top"))  ;
-           if (reticleX>=left && reticleX <=left+100 && reticleY>= top && reticleY<=top+150){
-            // balloons[i].classList.add('pop-background')
-            // balloons[i].classList.add('pop')
-              //  console.log('hit');
-                popBalloon(balloons[i]);
+            if (reticleX>=left && reticleX <=left+100 && reticleY>= top && reticleY<=top+150){
+                 popBalloon(balloons[i]);
+            }
         }
-
-
-
-        }
-
-
-
-
-
-       
-
-
-
-
-
-
-
     }
-    // let top = parseInt(window.getComputedStyle(balloonTest).getPropertyValue("top"));
-    // console.log(top)
-
-
-    //  if (top<100){
-    //     balloonTest.style.top="650px"
-    // }
-    // else{
-    //     balloonTest.style.top=`${top-2}`+'px';
-    // }
-
-
-
-
 }
 
 
