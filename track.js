@@ -96,7 +96,7 @@ function loadBalloons(){
         if (rand === 3) 
             balloons[i].style.background = "url('./balloon_red.png')";
         
-
+        //balloons[i].style.visibility='hidden';
     }
 }
 
